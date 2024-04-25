@@ -1,0 +1,50 @@
+{
+    "name": "@avidian/momutable",
+    "version": "1.0.0",
+    "description": "Create immutable instances of momentjs.",
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.js",
+    "unpkg": "./dist/umd/index.min.js",
+    "types": "./dist/types/index.d.ts",
+    "files": [
+        "dist/**/*"
+    ],
+    "scripts": {
+        "clean": "rimraf dist",
+        "build:cjs": "tsc -p tsconfig.cjs.json",
+        "build:esm": "tsc -p tsconfig.esm.json",
+        "build:umd": "rollup --config rollup.config.mjs",
+        "build": "npm run clean && npm run build:cjs && npm run build:esm && npm run build:umd",
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/avidianity/momutable.git"
+    },
+    "keywords": [
+        "Momentjs",
+        "immutable"
+    ],
+    "author": "John Michael Manlupig",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/avidianity/momutable/issues"
+    },
+    "homepage": "https://github.com/avidianity/momutable#readme",
+    "devDependencies": {
+        "@rollup/plugin-node-resolve": "^15.2.1",
+        "@rollup/plugin-terser": "^0.4.3",
+        "@types/jest": "^29.5.4",
+        "jest": "^29.6.4",
+        "ncp": "^2.0.0",
+        "rimraf": "^5.0.1",
+        "rollup": "^3.28.1",
+        "rollup-plugin-typescript2": "^0.35.0",
+        "ts-jest": "^29.1.1",
+        "tslib": "^2.6.2",
+        "typescript": "^5.2.2"
+    },
+    "dependencies": {
+        "moment": "^2.30.1"
+    }
+}
