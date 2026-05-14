@@ -3,7 +3,10 @@
     "compilerOptions": {
         "target": "ES2021",
         "module": "ESNext",
-        "outDir": "./dist/amd",
-        "sourceMap": true
+        "outDir": "./dist/umd",
+        "sourceMap": true,
+        "declaration": false,
+        "declarationDir": null,
+        "types": []
     }
 }

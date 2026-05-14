@@ -1,4 +1,4 @@
-import type { Moment } from 'moment';
+import moment from 'moment';
 
 const mutativeMethods = [
     'add',
@@ -27,26 +27,26 @@ const mutativeMethods = [
     'isoWeekYear',
 ];
 
-export default function makeImmutable(momentInstance: Moment) {
-    return new Proxy(momentInstance, {
-        get(target, prop, receiver) {
-            const originalMethod = Reflect.get(target, prop, receiver);
-            if (typeof originalMethod === 'function') {
-                if (mutativeMethods.includes(prop.toString())) {
-                    return function (...args: any[]) {
-                        const clonedInstance = momentInstance.clone();
-                        const result = Reflect.apply(
-                            originalMethod,
-                            clonedInstance,
-                            args
-                        );
+export default function momutable(
+    momentInstance: moment.Moment,
+): moment.Moment {
+    const instance = momentInstance.clone();
 
-                        return makeImmutable(result as Moment);
-                    };
+    for (const method of mutativeMethods) {
+        const original = (instance as any)[method];
+        if (typeof original === 'function') {
+            (instance as any)[method] = function (...args: any[]) {
+                const clone = instance.clone();
+                const result = original.apply(clone, args);
+
+                if (moment.isMoment(result)) {
+                    return momutable(result);
                 }
-                return originalMethod.bind(target);
-            }
-            return originalMethod;
-        },
-    });
+
+                return result;
+            };
+        }
+    }
+
+    return instance;
 }

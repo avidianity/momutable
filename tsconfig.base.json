@@ -3,6 +3,7 @@
         "declaration": true,
         "strict": true,
         "esModuleInterop": true,
+        "moduleResolution": "node",
         "declarationDir": "./dist/types",
         "lib": ["ES2015", "ES2016", "DOM", "ES2017", "ES2022"]
     },
